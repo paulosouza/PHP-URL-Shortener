@@ -1,18 +1,11 @@
 License: http://www.gnu.org/licenses/gpl-2.0.html
 
-Benefits
+Changes
 
-- Can shorten over 42 billion unique URLs in 6 or less characters (it can do more than 12,000,000 in only 4!)
-- Super duper fast—uses very little server resources
-- Includes an API so you can create your own short URLs on the fly
-- Option to turn clickthru tracking on and off
-- Option to limit usage to 1 IP address for personal use and to prevent spamming from others
-- Only uses alphanumeric characters so all browsers can interpret the URL
-- Secure—several data filters in place to prevent SQL injection hacks
-- Option to check if the URL is real (doesn’t respond with a 404) before shortening
-- Uses 301 redirects for SEO and analytics yumminess
-- Option to store a local cache to prevent database queries on every redirect
-- Option to change the characters allowed in a shortened url
+- Short URLs are not tied the auto-increment index. You can customize your URLs now (up to 5 alphanumeric chars).
+- Added the shorturl GET method to generate custom links. 
+- No more 301. 307 for "Redirection".
+- Home index shows current list of shorten links.
 
 Installation
 
@@ -33,4 +26,4 @@ Using your personal URL shortener service
 
 - To manually shorten URLs open in your web browser the location where you uploaded the files.
 - To programmatically shorten URLs with PHP use the following code:
-    $shortenedurl = file_get_contents('http://yourdomain.com/shorten.php?longurl=' . urlencode('http://' . $_SERVER['HTTP_HOST']  . '/' . $_SERVER['REQUEST_URI']));
+    $shortenedurl = file_get_contents('http://yourdomain.com/shorten.php?longurl=' . urlencode('http://' . $_SERVER['HTTP_HOST']  . '/' . $_SERVER['REQUEST_URI']) . "&shorturl=" . $your_short_url );
