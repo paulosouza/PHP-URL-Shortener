@@ -38,8 +38,13 @@ if(TRACK)
 	mysql_query('UPDATE ' . DB_TABLE . ' SET referrals=referrals+1 WHERE id="' . mysql_real_escape_string($shortened_id) . '"');
 }
 
-header('HTTP/1.1 301 Moved Permanently');
+header('HTTP/1.1 307 Temporary Redirect');
 header('Location: ' .  $long_url);
+/*
+echo "This is the DB id: " . $shortened_id;
+echo "<br>This is the short URL: " . getShortenedURLFromID ($shortened_id);
+echo "<br>This is the long URL: " . $long_url;
+*/
 exit;
 
 function getIDFromShortenedURL ($string, $base = ALLOWED_CHARS)
@@ -53,4 +58,15 @@ function getIDFromShortenedURL ($string, $base = ALLOWED_CHARS)
 		$out += strpos($base, $char) * pow($length, $size - $i);
 	}
 	return $out;
+}
+
+function getShortenedURLFromID ($integer, $base = ALLOWED_CHARS)
+{
+	$length = strlen($base);
+	while($integer > $length - 1)
+	{
+		$out = $base[fmod($integer, $length)] . $out;
+		$integer = floor( $integer / $length );
+	}
+	return $base[$integer] . $out;
 }

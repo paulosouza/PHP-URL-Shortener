@@ -3,7 +3,7 @@
 -- 
 
 CREATE TABLE `shortenedurls` (
-  `id` int(10) unsigned NOT NULL auto_increment,
+  `id` int(10) unsigned NOT NULL,
   `long_url` varchar(255) NOT NULL,
   `created` int(10) unsigned NOT NULL,
   `creator` char(15) NOT NULL,
